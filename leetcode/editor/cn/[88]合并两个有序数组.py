@@ -43,19 +43,18 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        p1, p2 = m - 1, n - 1
         index = m + n - 1
-        while p1 > -1 or p2 > -1:
-            # print(p1, p2, nums1[p1], nums2[p2], nums1)
-            if p1 < 0 or (p2 > -1 and nums2[p2] >= nums1[p1]):
+        p1, p2 = m - 1, n - 1
+        while index > -1:
+            if p1 < 0 or (p2 >= 0 and nums2[p2] >= nums1[p1]):
                 nums1[index] = nums2[p2]
-                index -= 1
                 p2 -= 1
             else:
                 nums1[index] = nums1[p1]
-                index -= 1
                 p1 -= 1
+            index -= 1
+
 
 # leetcode submit region end(Prohibit modification and deletion)
 if __name__ == '__main__':
-    Solution().merge(nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3)
+    Solution().merge(nums1=[1, 2, 3, 0, 0, 0], m=3, nums2=[2, 5, 6], n=3)
