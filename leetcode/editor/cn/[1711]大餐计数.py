@@ -64,5 +64,6 @@ class Solution:
 
 
 if __name__ == '__main__':
+    "https://leetcode-cn.com/problems/count-good-meals/solution/gong-shui-san-xie-xiang-jie-san-chong-gu-nn4f/"
     assert Solution().countPairs([1, 3, 5, 7, 9]) == 4
     assert Solution().countPairs([1, 1, 1, 3, 3, 3, 7]) == 15
