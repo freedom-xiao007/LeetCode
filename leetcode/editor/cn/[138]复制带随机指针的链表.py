@@ -76,29 +76,15 @@ class Node:
         self.random = random
 
 class Solution:
+    mp = dict()
     def copyRandomList(self, head: 'Node') -> 'Node':
-        new = Node(0)
-        p1 = new
-        cache = {}
-        arr = []
-        p2 = head
-        index = 0
-        while p2 is not None:
-            p1.next = Node(p2.val)
-            cache[p2.val] = index
-            arr.append(p2.next)
-            p1 = p1.next
-            p2 = p2.next
-            index += 1
-
-        # for key in cache:
-        #     print(key, cache[key].val)
-        p1 = new
-        p2 = head
-        while p2 is not None:
-            if p2.random is not None:
-                p1.next.random = arr[cache[p2.random.val]]
-            p1 = p1.next
-            p2 = p2.next
-        return new.next
+        if head == None:
+            return None
+        if head in self.mp:
+            return self.mp.get(head)
+        newHead = Node(x = head.val)
+        self.mp[head] = newHead
+        newHead.next = self.copyRandomList(head.next)
+        newHead.random = self.copyRandomList(head.random)
+        return newHead
 # leetcode submit region end(Prohibit modification and deletion)
