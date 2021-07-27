@@ -47,17 +47,17 @@ class TreeNode:
 
 class Solution:
     def findSecondMinimumValue(self, root: TreeNode) -> int:
-        return self.secondMin(-1, root)
+        ans = set()
+        self.dfs(root, ans)
+        if len(ans) < 2:
+            return -1
+        # print(sorted(ans))
+        return sorted(ans)[1]
 
-    def secondMin(self, ans: int, root: TreeNode) -> int:
-        print(root.val, root.left, root.right)
+    def dfs(self, root: TreeNode, ans: set):
         if root is None:
-            return ans
-        if root.left is None or root.right is None:
-            return ans
-        if root.left.val == root.right.val:
-            return root.val
-        if root.left.val < root.right.val:
-            return self.secondMin(root.right.val, root.right)
-        return self.secondMin(root.left.val, root.left)
+            return
+        ans.add(root.val)
+        self.dfs(root.left, ans)
+        self.dfs(root.right, ans)
 # leetcode submit region end(Prohibit modification and deletion)
