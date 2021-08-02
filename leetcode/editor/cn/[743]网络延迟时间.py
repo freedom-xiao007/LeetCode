@@ -30,7 +30,27 @@
 
 
 # leetcode submit region begin(Prohibit modification and deletion)
+import heapq
+from collections import defaultdict
+from typing import List
+
+
 class Solution:
-    def networkDelayTime(self, times: List[List[int]], N: int, K: int) -> int:
-        
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        connect = defaultdict(lambda:defaultdict(int))
+        for u,v,w in times:
+            connect[u][v] = w
+        q = [(0, k)]
+        explored = set()
+        while q:
+            t, node = heapq.heappop(q)
+            if node in explored:
+                continue
+            explored.add(node)
+            if len(explored) == n:
+                return t
+            for other, tm in connect[node].items():
+                if other not in explored:
+                    heapq.heappush(q, (t+tm, other))
+        return -1
 # leetcode submit region end(Prohibit modification and deletion)
