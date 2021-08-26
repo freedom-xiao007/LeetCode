@@ -64,3 +64,4 @@ class Solution:
 
 if __name__ == "__main__":
     assert Solution().numRescueBoats(people = [3,2,2,1], limit = 3) == 3
+    assert Solution().numRescueBoats(people = [3,5,3,4], limit = 5) == 4
