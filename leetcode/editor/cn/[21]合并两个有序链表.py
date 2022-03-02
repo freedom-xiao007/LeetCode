@@ -21,31 +21,16 @@ class ListNode:
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        ans = []
-        while l1 or l2:
-            if not l1:
-                ans.append(l2.val)
-                l2 = l2.next
-            elif not l2:
-                ans.append(l1.val)
-                l1 = l1.next
-            elif l1 and l2:
-                if l1.val < l2.val:
-                    ans.append(l1.val)
-                    l1 = l1.next
-                else:
-                    ans.append(l2.val)
-                    l2 = l2.next
-
-        # print(ans)
-        if not ans:
-            return None
-        l = ListNode(ans[0])
-        p = l
-        for i in range(1, len(ans)):
-            p.next = ListNode(ans[i])
+        p = ListNode()
+        ans = p.next
+        p1, p2 = l1, l2
+        while p1 is not None and p2 is not None:
+            if p2 is None or (p1 is not None and p1.val < p2.val):
+                p.next = ListNode(p1.val, None)
+                p1 = p1.next
+            else:
+                p.next = ListNode(p2.val, None)
+                p2 = p2.next
             p = p.next
-        return l
-
-
+        return ans
 # leetcode submit region end(Prohibit modification and deletion)
