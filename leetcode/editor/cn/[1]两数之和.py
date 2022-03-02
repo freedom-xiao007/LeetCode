@@ -18,7 +18,6 @@
 # leetcode submit region begin(Prohibit modification and deletion)
 from typing import List
 
-
 class Solution:
     """
     解题思路：
@@ -27,17 +26,17 @@ class Solution:
     """
 
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        m = {}
-        for i in range(0, len(nums)):
-            remainder = target - nums[i]
-            if remainder in m and i != m[remainder]:
-                return [m[remainder], i]
-            m[nums[i]] = i
+        if len(nums) == 0:
+            return []
+        cal_cache = {target - nums[0]: 0}
+        for i in range(1, len(nums)):
+            num = nums[i]
+            if num in cal_cache:
+                return [cal_cache[num], i]
+            cal_cache[target - num] = i
         return []
-
-
 # leetcode submit region end(Prohibit modification and deletion)
 
 
 if __name__ == "__main__":
-    assert Solution().twoSum(nums=[2, 7, 11, 15], target=9) == [0, 1]
+    assert [0, 1] == Solution().twoSum(nums=[2, 7, 11, 15], target=9)
