@@ -47,24 +47,27 @@ from typing import List
 
 class Solution:
     def plusOne(self, digits: List[int]) -> List[int]:
-        result = []
+        """
+        从最低位开始加
+        如果等于10，该位置为0
+        后面的一位需要加一
+        最后看看有没有进位，如果有进位，需要增加最后一位为1，比如9+1=10
+        """
+        res = []
         carry = 1
-        for i in range(len(digits) - 1, -1, -1):
-            num = digits[i] + carry
-
-            carry = 0
-            if num == 10:
+        for num in range(len(digits) - 1, -1, -1):
+            value = digits[num] + carry
+            if value == 10:
+                res.append(0)
                 carry = 1
-                num = 0
-
-            result.append(num)
-
+            else:
+                res.append(value)
+                carry = 0
         if carry == 1:
-            result.append(1)
-
-        result.reverse()
-        return result
-
+            res.append(1)
+        res.reverse()
+        # print(res)
+        return res
 
 # leetcode submit region end(Prohibit modification and deletion)
 
