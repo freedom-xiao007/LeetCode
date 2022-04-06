@@ -42,19 +42,26 @@ class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
         Do not return anything, modify nums1 in-place instead.
+        两个数组是有序的，我们可以先找到两数组中最大的，放到nums1的右边，从右往左开始填充
         """
-        index = m + n - 1
-        p1, p2 = m - 1, n - 1
-        while index > -1:
-            if p1 < 0 or (p2 >= 0 and nums2[p2] >= nums1[p1]):
-                nums1[index] = nums2[p2]
-                p2 -= 1
-            else:
-                nums1[index] = nums1[p1]
-                p1 -= 1
-            index -= 1
+        l, r = m - 1, n - 1
+        cur = m + n - 1
+        while l >= 0 or r >= 0:
+           if r < 0 or (l >=0 and nums1[l] >= nums2[r]):
+                nums1[cur] = nums1[l]
+                l = l - 1
+           else:
+                nums1[cur] = nums2[r]
+                r = r - 1
+           cur = cur - 1
+        # print(nums1)
 
 
 # leetcode submit region end(Prohibit modification and deletion)
 if __name__ == '__main__':
-    Solution().merge(nums1=[1, 2, 3, 0, 0, 0], m=3, nums2=[2, 5, 6], n=3)
+    nums1 = [1, 2, 3, 0, 0, 0]
+    m = 3
+    nums2 = [2, 5, 6]
+    n = 3
+    Solution().merge(nums1, m, nums2, n)
+    assert nums1 == [1, 2, 2, 3, 5, 6]
