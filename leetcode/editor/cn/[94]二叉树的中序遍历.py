@@ -21,23 +21,26 @@ from typing import List
 
 
 # Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, x):
-        self.val = x
-        self.left = None
-        self.right = None
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
 
 class Solution:
     def inorderTraversal(self, root: TreeNode) -> List[int]:
+        """
+        左中右顺序
+        """
         ans = []
-        self._inOrder(root, ans)
+        self._in_order(root, ans)
         return ans
 
-    def _inOrder(self, root, ans):
-        if not root:
+    def _in_order(self, root, ans):
+        if root is None:
             return
-        self._inOrder(root.left, ans)
+        self._in_order(root.left, ans)
         ans.append(root.val)
-        self._inOrder(root.right, ans)
+        self._in_order(root.right, ans)
 # leetcode submit region end(Prohibit modification and deletion)
